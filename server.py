@@ -8,21 +8,11 @@ from flask import (
     url_for
 )
 
-
-def load_clubs():
-    with open('clubs.json', 'r') as c:
-         list_of_clubs = json.load(c)['clubs']
-         return list_of_clubs
-
-
-def load_competitions():
-    with open('competitions.json', 'r') as comps:
-         list_of_competitions = json.load(comps)['competitions']
-         return list_of_competitions
+from config import load_clubs, load_competitions, SECRET_KEY
 
 
 app = Flask(__name__)
-app.secret_key = 'something_special'
+app.secret_key = SECRET_KEY
 
 loaded_competitions = load_competitions()
 clubs = load_clubs()
@@ -31,7 +21,7 @@ clubs = load_clubs()
 def index():
     return render_template('index.html')
 
-@app.route('/show_summary',methods=['POST'])
+@app.route('/show_summary', methods=['POST'])
 def show_summary():
     chosen_club = [
         club for club in clubs if club['email'] == request.form['email']
@@ -42,9 +32,10 @@ def show_summary():
         competitions=loaded_competitions
     )
 
-
 @app.route('/book/<competition>/<club>')
-def book(competition,club):
+def book(competition, club):
+    club = club.replace('_', ' ').title()
+    competition = competition.replace('_', ' ').title()
     found_club = [
         c for c in clubs if c['name'] == club
     ][0]
@@ -64,7 +55,6 @@ def book(competition,club):
             club=club,
             competitions=loaded_competitions
         )
-
 
 @app.route('/purchase_places',methods=['POST'])
 def purchase_places():
@@ -92,3 +82,6 @@ def purchase_places():
 @app.route('/logout')
 def logout():
     return redirect(url_for('index'))
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=5000, debug=True)

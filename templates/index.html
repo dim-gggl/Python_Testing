@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>GUDLFT Registration</title>
   </head>
   <body>
@@ -13,7 +15,7 @@
       <input type="email" name="email" id="email" required/>
       <button type="submit">Enter</button>
     </form>
-    <a href="{{ url_for('display_points') }}">Display Points</a>
+    <a href="{{ url_for('points_display') }}">Display Points</a>
     {% endblock %}
   </body>
 </html>

@@ -15,14 +15,14 @@
         <ul>
           {% for comp in competitions %}
             <li>
-              {{ comp['name'] }}<br>
-              Date: {{ comp['date'] }}<br>
-              Number of Places: {{ comp['number_of_places'] }}<br>
-              {% if comp['number_of_places']|int >0 %}
+              {{ comp.name }}<br>
+              Date: {{ comp.date }}<br>
+              Number of Places: {{ comp.number_of_places }}<br>
+              {% if comp.number_of_places|int >0 %}
                 <a href="{{ url_for(
                     'book', 
-                    competition=comp['name'].lower().replace(' ', '_'), 
-                    club=club['name'].lower().replace(' ', '_')
+                    competition=comp.name.lower().replace(' ', '_'), 
+                    club=club.name.lower().replace(' ', '_')
                   ) }}">
                   Book Places
                 </a>

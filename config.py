@@ -1,15 +1,9 @@
-import json
+import os
+from dotenv import load_dotenv
 
-__all__ = ['load_clubs', 'load_competitions']
+load_dotenv()
 
-SECRET_KEY = 'something_special'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-def load_clubs():
-    with open('data/clubs.json', 'r') as c:
-         list_of_clubs = json.load(c)['clubs']
-         return list_of_clubs
-
-def load_competitions():
-    with open('data/competitions.json', 'r') as comps:
-         list_of_competitions = json.load(comps)['competitions']
-         return list_of_competitions
+CLUBS_FILE = 'data/clubs.json'
+COMPETITIONS_FILE = 'data/competitions.json'

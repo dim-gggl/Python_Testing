@@ -6,3 +6,4 @@ lib
 __pycache__
 .DS_Store
 CACHEDIR.TAG
+.pytest_cache/

@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% block content %}
+  <h2>Points Display</h2>
+  <table>
+    <tr>
+      <th>Clubs</th>
+      <th>Points</th>
+    </tr>
+    {% for club in clubs %}
+      <tr>
+        <td>{{ club['name'] }}</td>
+        <td>{{ club['points'] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  <a href="{{ url_for('index') }}">Back to index</a>
+{% endblock %}
